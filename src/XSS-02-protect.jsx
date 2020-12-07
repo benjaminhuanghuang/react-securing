@@ -30,7 +30,24 @@ const response = [
 // which is injected to the DOM...
 const initialState = JSON.stringify(response);
 
-class XssDanger extends Component {
+const removeXSSAttacks = (html) => {
+  const SCRIPT_REGEX = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi;
+
+  // Removing the <script> tags
+  while (SCRIPT_REGEX.test(html)) {
+    html = html.replace(SCRIPT_REGEX, "");
+  }
+
+  // Removing all events from tags...
+  html = html.replace(/ on\w+="[^"]*"/g, "");
+
+  return {
+    __html: html,
+  };
+};
+
+
+class Xss extends Component {
   render() {
     // Parsing the JSON string to an actual object...
     const posts = JSON.parse(initialState);
@@ -42,11 +59,7 @@ class XssDanger extends Component {
           <div key={key}>
             <h2>{post.title}</h2>
             {/* React encode the html by default*/}
-            <p>{post.content}</p>
-            <p><strong>Insecure Code:</strong></p>
-              <p 
-                dangerouslySetInnerHTML={{ __html: post.content }} 
-              /> 
+            <p dangerouslySetInnerHTML={removeXSSAttacks(post.content)} />
           </div>
         ))}
       </div>
@@ -54,6 +67,6 @@ class XssDanger extends Component {
   }
 }
 
-export default XssDanger;
+export default Xss;
 
 

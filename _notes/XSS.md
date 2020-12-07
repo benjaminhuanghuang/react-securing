@@ -9,3 +9,13 @@ By default, React prevents us from injecting HTML code directly into our compone
 ```
 XSS-protected.jsx
 ```
+
+
+dangerouslySetInnerHTML can protect direct injection
+```
+  <script>alert(1);</script>
+```
+but not
+```
+  <img onmouseover="alert('This site is not secure');" src="attack.jpg" />
+```
