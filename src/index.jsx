@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App.jsx';
 //
-import Xss from './XSS-02-protect'
+import {default as Demo} from './xss/XSS-02-protect'
 import XssDanger from './XSS-01-danger'
 
 
-ReactDOM.render(<Xss />, document.getElementById('root'));
+ReactDOM.render(<Demo />, document.getElementById('root'));
