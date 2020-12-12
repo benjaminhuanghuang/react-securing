@@ -9,8 +9,13 @@ By default, React prevents us from injecting HTML code directly into our compone
 ```
 XSS-protected.jsx
 ```
-
-
+Direct setting innerHTML is not promitted.
+```
+  <div innerHTML={jsonResponse}>
+```
+```
+  <div dangerouslySetInnerHTML= {{ __html: jsonResponse.content }}>
+```
 dangerouslySetInnerHTML can protect direct injection
 ```
   <script>alert(1);</script>

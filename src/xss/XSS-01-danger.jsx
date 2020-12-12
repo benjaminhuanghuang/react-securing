@@ -1,23 +1,23 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 // Let's suppose this response is coming from a service and have
 // some XSS attacks in the content...
 const response = [
   {
     id: 1,
-    title: "My blog post 1...",
-    content: "<p>This is <strong>HTML</strong> code</p>",
+    title: 'My blog post 1...',
+    content: '<p>This is <strong>HTML</strong> code</p>',
   },
   {
     id: 2,
-    title: "My blog post 2...",
+    title: 'My blog post 2...',
     //  dangerouslySetInnerHTML can protect <script>
-    content: `<p>Alert: <script>alert(1);</script></p>`,
+    content: '<p>Alert: <script>alert(1);</script></p>',
   },
   {
     id: 3,
-    title: "My blog post 3...",
-    // xss 
+    title: 'My blog post 3...',
+    // xss
     content: `
         <p>
        <img onmouseover="alert('This site is not secure');" 
@@ -39,15 +39,15 @@ class XssDanger extends Component {
     // Rendering our posts...
     return (
       <div className="Xss">
-        {posts.map((post, key) => (
-          <div key={key}>
+        {posts.map((post) => (
+          <div key={post.id}>
             <h2>{post.title}</h2>
-            {/* React encode the html by default*/}
+            {/* React encode the html by default */}
             <p>{post.content}</p>
             <p><strong>Insecure Code:</strong></p>
-              <p 
-                dangerouslySetInnerHTML={{ __html: post.content }} 
-              /> 
+            <p
+              dangerouslySetInnerHTML={{ __html: post.content }}
+            />
           </div>
         ))}
       </div>
@@ -56,5 +56,3 @@ class XssDanger extends Component {
 }
 
 export default XssDanger;
-
-

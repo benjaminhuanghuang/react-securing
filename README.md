@@ -1,14 +1,17 @@
 # React Securing
 
-- ESLint
+- IDE setup: flow, ESLint
 
-- OWASP
+- OWASP (Open Web Applicaton Security Project)
+https://cheatsheetseries.owasp.org
 
 - XSS (Corss-site script)
 
 - CSRF (Corss-site request forgery)
 
 - JWT (JSON Web Token)
+https://jwt.io
+
 
 - AuthO
 

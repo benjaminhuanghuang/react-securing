@@ -1,22 +1,22 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 // Let's suppose this response is coming from a service and have
 // some XSS attacks in the content...
 const response = [
   {
     id: 1,
-    title: "My blog post 1...",
-    content: "<p>This is <strong>HTML</strong> code</p>",
+    title: 'My blog post 1...',
+    content: '<p>This is <strong>HTML</strong> code</p>',
   },
   {
     id: 2,
-    title: "My blog post 2...",
-    content: `<p>Alert: <script>alert(1);</script></p>`,
+    title: 'My blog post 2...',
+    content: '<p>Alert: <script>alert(1);</script></p>',
   },
   {
     id: 3,
-    title: "My blog post 3...",
-    // xss 
+    title: 'My blog post 3...',
+    // xss
     content: `
         <p>
        <img onmouseover="alert('This site is not secure');" 
@@ -32,20 +32,19 @@ const initialState = JSON.stringify(response);
 
 const removeXSSAttacks = (html) => {
   const SCRIPT_REGEX = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi;
-
+  let safeHtml = html;
   // Removing the <script> tags
-  while (SCRIPT_REGEX.test(html)) {
-    html = html.replace(SCRIPT_REGEX, "");
+  while (SCRIPT_REGEX.test(safeHtml)) {
+    safeHtml = safeHtml.replace(SCRIPT_REGEX, '');
   }
 
   // Removing all events from tags...
-  html = html.replace(/ on\w+="[^"]*"/g, "");
+  safeHtml = safeHtml.replace(/ on\w+="[^"]*"/g, '');
 
   return {
-    __html: html,
+    __html: safeHtml,
   };
 };
-
 
 class Xss extends Component {
   render() {
@@ -55,10 +54,10 @@ class Xss extends Component {
     // Rendering our posts...
     return (
       <div className="Xss">
-        {posts.map((post, key) => (
-          <div key={key}>
+        {posts.map((post) => (
+          <div key={post.id}>
             <h2>{post.title}</h2>
-            {/* React encode the html by default*/}
+            {/* React encode the html by default */}
             <p dangerouslySetInnerHTML={removeXSSAttacks(post.content)} />
           </div>
         ))}
@@ -68,5 +67,3 @@ class Xss extends Component {
 }
 
 export default Xss;
-
-
