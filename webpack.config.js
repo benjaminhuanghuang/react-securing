@@ -5,7 +5,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const config = {
   entry: "./src/index.jsx",
   output: {
-    path: path.resolve(__dirname, "public"),
+    path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
   },
   module: {
@@ -30,7 +30,7 @@ const config = {
   },
   mode: "development",
   devServer: {
-    contentBase: path.join(__dirname, "public"),
+    contentBase: path.join(__dirname, "dist"),
     compress: true,
     port: 3721,
   },
