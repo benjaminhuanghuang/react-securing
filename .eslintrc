@@ -6,6 +6,8 @@
   },
   "rules": {
     "react/prefer-stateless-function": "off",
-    "react/destructuring-assignment" : "off"
+    "react/destructuring-assignment": "off",
+    "react/button-has-type": "off",
+    "quotes": [2, "prefer-single"]
   }
 }
