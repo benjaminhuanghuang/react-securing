@@ -3,7 +3,7 @@
 The JSON object currently consists of 3 items: a header, the payload, and the signature.
 
 
-## Auth0 - server side
+## Auth0  setup
 https://manage.auth0.com/dashboard/
 
 Create Application, Single Plage Web Application
@@ -19,4 +19,9 @@ copy auth_config.json
 utils/history
 components/Loading
 assets/loding.svg
+
+## Auth0 client
+```
+  npm i @auth0/auth0-react axios
+```
 

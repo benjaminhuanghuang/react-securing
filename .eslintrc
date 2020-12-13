@@ -5,6 +5,7 @@
     "node": true
   },
   "rules": {
-    "react/prefer-stateless-function": "off"
+    "react/prefer-stateless-function": "off",
+    "react/destructuring-assignment" : "off"
   }
 }
